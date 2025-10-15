@@ -1,0 +1,19 @@
+#人工智能说这个可以,暂时这样
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# 配置
+.env
+*.local
+
+
