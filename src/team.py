@@ -1,9 +1,9 @@
 from student import Student
 class Team:
-    ##############################################
-    #
+    """
 
-    #
+    
+    """
     CAPACITY=5;
 
     def __init__(self,original_students:list):
