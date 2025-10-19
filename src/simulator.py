@@ -16,6 +16,7 @@ class TeamAllocationSimulator:
         传入:源文件,不是地址
         传出:列表
         源文件每一行作为列表lines的每一项
+        *无视第一行*
         """
         pass;
 
@@ -66,7 +67,7 @@ class TeamAllocationSimulator:
 
         # create file and put answer in
         try:
-            with open("out.csv",'w') as out_file:
+            with open("out2.csv",'w') as out_file:
                 for i in new_lines:
                     print(i,file=out_file);
             pass;
