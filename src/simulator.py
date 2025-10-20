@@ -4,6 +4,7 @@ from student import Student
 from team import Team
 
 class TeamAllocationSimulator:
+    TEAM_CAPACITY=5;
     def __init__(self,file_address=""):
         """
         TeamAllocationSimulator初始化
@@ -58,8 +59,8 @@ class TeamAllocationSimulator:
         students=self._parse_students_from_lines(lines);
         
         # call allocator parse team list:
-        team_allocator=TeamAllocator();
-        teams=team_allocator.allocate_students_into_teams(students);
+        team_allocator=TeamAllocator(students);
+        teams=team_allocator.allocate_students_into_teams(TEAM_CAPACITY);
 
         # turn list into csv file:
         new_lines=self._modify_lines_from_teams(lines,teams);
