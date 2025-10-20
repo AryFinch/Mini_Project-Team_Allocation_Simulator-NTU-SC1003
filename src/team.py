@@ -4,6 +4,7 @@ class Team:
     类:任意个 “Student” 组成一个Team
     students:列表,里面充满学生类
     函数:衡量该分组的性别比例,学校多样性,平均分
+
     """
 
     def __init__(self,original_students:list):

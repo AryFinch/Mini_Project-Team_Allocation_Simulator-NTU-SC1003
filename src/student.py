@@ -5,6 +5,12 @@ class Student:
     tutorial_group,student_id,name,school,gender,cgpa
     """
     def __init__(self,tutorial_group="",student_id="",name="",school="",gender="",cgpa=""):
+        """
+        初始化函数,
+        传入:str
+        将自己的各种数据按照参数一一赋值
+        """
+        #深拷贝,养成意识
         from copy import deepcopy
         self.tutorial_group=deepcopy(tutorial_group)
         self.student_id=deepcopy(student_id);
@@ -12,4 +18,6 @@ class Student:
         self.school=deepcopy(school)
         self.gender=deepcopy(gender)
         self.cgpa=deepcopy(cgpa);
+        # might not be used, but leave the possibility.
+        self.team_asssigned=deepcopy(None);
     pass;
