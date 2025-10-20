@@ -28,7 +28,7 @@ class TeamAllocator:
         all_in_team=Team(self.students_copy);
         self.overall_gender_rate=all_in_team.gender_rate();
         self.overall_school_diversity=all_in_team.school_diversity();
-        self.overall_gpa_average=all_in_team.gpa_average();
+        self.overall_cgpa_average=all_in_team.cgpa_average();
     
         pass;
     
@@ -69,7 +69,7 @@ class TeamAllocator:
             
             # choose the bad team, break and pull into unallo.
 
-            # sort rest teams by gpa
+            # sort rest teams by cgpa
 
             # assign students in unallo. into teams need a student
 
@@ -84,5 +84,6 @@ class TeamAllocator:
         传入:Team
         传出:int该组的得分
         将三个维度的数据化为一个维度,衡量diversity
+        p.s.根据要求,性别和学校多样性的权重应该较高.
         """
         pass;
