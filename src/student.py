@@ -1,7 +1,8 @@
 class Student:
     """
-    类:学生
-    储存一个学生的所有信息
+    一个学生的所有信息
+    包括str:
+    tutorial_group,student_id,name,school,gender,cgpa
     """
     def __init__(self,tutorial_group="",student_id="",name="",school="",gender="",cgpa=""):
         """
