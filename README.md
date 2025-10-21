@@ -68,6 +68,7 @@ class CooperationTutorial:
             you.写代码(mini_project);
             if 所有任务完成():
                 mini_project.commit();# 在左下角,同时写清楚主要进展:对什么文件修改/添加了什么......
+                mini_project.push();# 注意不是pull
 
     def 没有用的函数():
         """
