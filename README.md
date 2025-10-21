@@ -21,6 +21,9 @@ Li Zhuochen
 
 ## 待完成函数
 ### team.py
+- [ ] gender_rate
+- [ ] school_diversity
+- [ ] cgpa_average
 ### simulator.py
 - [ ] _parse_lines_from_csv_file
 - [ ] _parse_students_from_lines
