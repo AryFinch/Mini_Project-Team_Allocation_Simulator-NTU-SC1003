@@ -66,8 +66,12 @@ class CooperationTutorial:
         mini_project.create_branch();# 创建一个你的分支,你的修改会在你的分支上
         while True:
             you.写代码(mini_project);
-            if 所有任务完成():
+            if is_所有任务完成():
                 mini_project.commit();# 在左下角,同时写清楚主要进展:对什么文件修改/添加了什么......
+                mini_project.push();
+
+            if is_finish_branch():
+                mini_project.merge();#注意⚠️ 一定要确保正确,没有冲突
 
     def 没有用的函数():
         """
