@@ -17,7 +17,7 @@ class Team:
         for student in self.students:
             if not isinstance(student,Student):
                 raise TypeError;
-
+        
         pass;
     
     def gender_rate(self):
