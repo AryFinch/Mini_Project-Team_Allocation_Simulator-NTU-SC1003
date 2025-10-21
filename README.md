@@ -22,12 +22,16 @@ Li Zhuochen
 ## 待完成函数
 ### team.py
 ### simulator.py
-- [] _parse_lines_from_csv_file
-- [] _parse_students_from_lines
-- []
-- []
+- [ ] _parse_lines_from_csv_file
+- [ ] _parse_students_from_lines
+- [ ] _modify_lines_from_teams
 ### team_allocator.py
-- [] 
+- [ ] _assign_unallocated_student_to_team
+- [ ] _break_team
+- [ ] estimate_diversity_of_team
+- [ ] (Li Zhuochen) allocate_students_into_teams
+- [ ] (Li Zhuochen) allocate_students_into_teams
+- [ ] (need design) estimate_diversity_of_team
 
 ## stucture 🏛️
 **student.py**:封装了一个学生的所有信息
@@ -94,11 +98,14 @@ class CooperationTutorial:
 # class的外面......
 tutorial = CooperationTutorial();
 tutorial.begin();
-"""
+
+```
 怎么理解这两句话?
 想象另一个场景:
+```
 from stationary_store import Pencil
 my_pencil=Pencil();
+```
 这个就好像,你要去文具店买笔,最开始你只有‘笔’这一个 概念(也就是类(class) )
 当你买到笔了,my_pencil就是Pencil的一个实例(instance);
 区别: Pencil无法做任何事情,my_pencil才能够写字!
@@ -107,5 +114,3 @@ my_pencil=Pencil();
 所以,这两句话的意思是:
 我创建了一个tutorial实例;
 我的tutorial开始啦;
-"""
-```

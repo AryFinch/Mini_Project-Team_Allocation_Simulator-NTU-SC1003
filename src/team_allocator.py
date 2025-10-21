@@ -35,7 +35,7 @@ class TeamAllocator:
     
         pass;
     
-    def _assign_unallocated_student_to_team(self,team_capa  city):
+    def _assign_unallocated_student_to_team(self,team_capacity:int):
             """
             检查unallocated_students
             如果存在team,将它分到合适的team中
@@ -50,30 +50,6 @@ class TeamAllocator:
     def _break_team(self):
         pass;
     
-    def estimate_diversity_of_team(self,original_team:Team):
-        """
-        传入:Team
-        传出:int该组的得分
-        将三个维度的数据化为一个维度,衡量diversity
-        """
-        pass;
-
-    def allocate_students_into_teams(self,original_students,team_capacity):
-        """
-        传入:列表(Student);一个组的人数
-
-        递归,对于要组成X个人的team,将第X个人加入已有X-1个人的组.
-        第X个人来自被拆散的组,将最不符合“要求”的组拆散
-        """
-        # copy data
-        from copy import deepcopy
-        students=deepcopy(original_students);
-
-        # basic state
-        if team_capacity==1:
-            return Team(students);
-    
-        #
 
     def allocate_students_into_teams(self,team_capacity:int):
         """
