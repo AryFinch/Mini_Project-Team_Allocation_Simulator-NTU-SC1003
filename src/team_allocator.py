@@ -35,21 +35,35 @@ class TeamAllocator:
     
         pass;
     
-    def _assign_unallocated_student_to_team(self,team_capacity:int):
-            """
-            检查unallocated_students
-            如果存在team,将它分到合适的team中
-            如果没有,创建一个team
-            """
-            # pull-out the first one to assign
-
-            # run all of the exist team and assign it to the team with highest score if it attend the team
-
-            pass;
-    
     def _break_team(self):
         pass;
     
+    def _assign_unallocated_student_to_team(self,team_capacity):
+        """
+        检查unallocated_students
+        如果存在team,将它分到合适的team中
+        如果没有,创建一个team
+        """
+        # pull-out the first one to assign
+        while len(self.unallocated_students):
+            student=self.unallocated_students
+            self.unallocated_students.pop(0);
+
+        # run all of the exist team and assign it to the team with highest score if it attend the team
+            best_team=Team([]); # rigister the best choice
+            best_score=int(-2147483647);
+            teams_need_students=[teams_need_student in self.teams if len(teams_need_student.students)<team_capacity ];
+            for new_team in teams_need_students: # go thru the existed teams
+                new_score=self.estimate_diversity_of_team(Team(new_team.students+[student])) # estimate the score if the student join
+                if new_score>best_score:
+                    best_score=new_score;# record the best choice
+                    best_team=new_team;
+            best_team.add_student(student);# add the student into the best team
+            if len(best_team.students)==1:# this mean that the best choice is the empty one, indicating that teams is empty
+                self.teams.append(best_team);
+                pass;
+
+        pass;
 
     def allocate_students_into_teams(self,team_capacity:int):
         """
@@ -58,11 +72,16 @@ class TeamAllocator:
         对于要组成X个人的team,将第X个人加入已有X-1个人的组.
         第X个人来自被拆散的组,将最不符合“要求”的组拆散
         """
+        
         if team_capacity==1:
             # erase data
             self.unallocated_students=[];
             self.teams=[];
+
             # pull all students into unallocated_students
+            from copy import deepcopy
+            self.unallocated_students=deepcopy(self.students_copy);
+            self._assign_unallocated_student_to_team();
 
             # assign all unall. into teams of itself
             pass;
@@ -83,7 +102,7 @@ class TeamAllocator:
             raise ValueError;
         pass;
     
-    def estimate_diversity_of_team(self,original_team:set):
+    def estimate_diversity_of_team(self,original_team:Team):
         """
         传入:Team
         传出:int该组的得分

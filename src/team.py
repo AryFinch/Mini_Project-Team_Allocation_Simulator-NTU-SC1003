@@ -1,5 +1,5 @@
 from student import Student
-class Team:
+class Team:# 类 概念
     """
     类:任意个 “Student” 组成一个Team
     students:列表,里面充满学生类
@@ -10,7 +10,7 @@ class Team:
     def __init__(self,original_students:list):
         # copy data
         from copy import deepcopy
-        self.students=set();
+        self.students=list();
         self.students=deepcopy(original_students);
         
         #check the content
@@ -39,5 +39,8 @@ class Team:
         输出:float平均cgpa
         """
         pass;
+    
+    def add_student(self,new_student:Student):
+        self.students.append(new_student);
     
     pass;
