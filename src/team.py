@@ -25,6 +25,10 @@ class Team:
         输出:float性别比例
         用一种算法(是什么呢?)衡量性别比例,
         """
+        n = len(self.students)
+        if n == 0:
+           return 0.5
+        
         pass;
     
     def school_diversity(self):
