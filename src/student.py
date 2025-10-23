@@ -19,5 +19,9 @@ class Student:
         self.gender=deepcopy(gender)
         self.cgpa=deepcopy(cgpa);
         # might not be used, but leave the possibility.
-        self.team_asssigned=deepcopy(None);
+        self.team_assigned=deepcopy(None);
+        try:
+            self.cgpa = float(cgpa)
+        except:
+            self.cgpa = 0.0
     pass;
