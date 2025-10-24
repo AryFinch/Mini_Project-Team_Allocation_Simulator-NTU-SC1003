@@ -45,13 +45,13 @@ class TeamAllocationSimulator:
     #     """
     #     pass;
     
-    def _modify_lines_from_teams(self,original_lines,original_teams):
-        """
-        传入:列表 源文件的每一列; 列表 team
-        传出:列表 输出文件的每一列
-        遍历源文件的每一列,将该列学生所分组按照teams添加新的一列
-        """
-        pass;
+    # def _modify_lines_from_teams(self,original_lines,original_teams):
+    #     """
+    #     传入:列表 源文件的每一列; 列表 team
+    #     传出:列表 输出文件的每一列
+    #     遍历源文件的每一列,将该列学生所分组按照teams添加新的一列
+    #     """
+    #     pass;
 
     def begin(self):
         # open file:
