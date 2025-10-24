@@ -8,7 +8,7 @@ class Student:
     包括str:
     tutorial_group,student_id,name,school,gender,cgpa
     """
-    def __init__(self,tutorial_group="",student_id="",name="",school="",gender="",cgpa=""):
+    def __init__(self,tutorial_group="",student_id="",school="",name="",gender="",cgpa:float=0.0):
         """
         初始化函数,
         传入:str
@@ -27,5 +27,9 @@ class Student:
         except:
             self.cgpa = 0.0
         # might not be used, but leave the possibility.
-        self.team_assigned=deepcopy(None);
+        self.team_assigned=deepcopy(str());
     pass;
+
+    @property
+    def string_form(self):
+        return f"{self.tutorial_group},{self.student_id},{self.school},{self.name},{self.cgpa},{self.team_assigned}"

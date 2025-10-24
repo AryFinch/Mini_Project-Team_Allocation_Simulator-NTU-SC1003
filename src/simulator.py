@@ -12,21 +12,30 @@ class TeamAllocationSimulator:
         self.TEAM_CAPACITY=5;
         pass;
 
-    def _parse_lines_from_csv_file(self,original_csv_file):
-        """
-        传入:源文件,不是地址
-        传出:列表
-        源文件每一行作为列表lines的每一项
-        *无视第一行*
-        """
-        pass;
+    # def _parse_lines_from_csv_file(self,original_csv_file:File):
+    #     """
+    #     传入:源文件,不是地址
+    #     传出:列表
+    #     源文件每一行作为列表lines的每一项
+    #     *无视第一行*
+    #     """
+    #     from copy import deepcopy
+    #     csv_file_copy=deepcopy(original_csv_file);
+    #     csv_file_copy.read();
 
-    def _parse_students_from_lines(self,original_lines):
+    #     pass;
+
+    def _parse_students_from_lines(self,original_lines) -> list[Student]:
         """
         传入:列表 源文件的各个行
         传出:列表(student类)
         将lines的每一项化成student
         """
+        students=list();
+        for line in original_lines:
+            create_student=Student(line[0],line[1],line[2],line[3],line[4],float(line[5]));
+            students.append(create_student);
+        return students;
         pass;
     
     # def _parse_teams_into_csv_file(self,original_teams):
@@ -51,28 +60,48 @@ class TeamAllocationSimulator:
             with open(self.file_address,'r') as csv_file:
                 
         # process file to lines:
-                lines=self._parse_lines_from_csv_file(csv_file);
+                self.lines=csv_file.readlines();
+                del self.lines[0];
                 
         except:
-            pass;# tbc invalid
+            raise FileExistsError;# tbc invalid
         
         # process sheet to student list:
         students=self._parse_students_from_lines(lines);
-        
-        # call allocator parse team list:
-        team_allocator=TeamAllocator(students);
-        teams=team_allocator.allocate_students_into_teams(self.TEAM_CAPACITY);
 
-        # turn list into csv file:
-        new_lines=self._modify_lines_from_teams(lines,teams);
+        #into different groups:
+        tutorial_groups={};
+        tutorial_group_names=[];
+        for s in students:
+            if not s.tutorial_group in tutorial_groups:
+                tutorial_groups[s.tutorial_group]=[];
+                tutorial_group_names.append(s.tutorial_group);
+            tutorial_groups[s.tutorial_group].append(s);
+        
+        #for each tutgroup
+        for tutorial_group_name in tutorial_group_names:
+            team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);
+            team_allocator.begin(self.TEAM_CAPACITY);
+            is_successful=team_allocator.tag_students_with_teams(students);
+            if not is_successful:
+                print("cannot find corresponding student in allocator")
+                raise KeyError;
+        
+        # # call allocator parse team list:
+        # team_allocator=TeamAllocator(students);
+        # teams=team_allocator.begin(self.TEAM_CAPACITY);
+
+        # # turn list into csv file:
+        # new_lines=self._modify_lines_from_teams(lines,teams);
 
         # create file and put answer in
         try:
-            with open("out2.csv",'w') as out_file:
-                for i in new_lines:
-                    print(i,file=out_file);
+            with open("out.csv",'w') as out_file:
+                for tutorial_group_name in tutorial_group_names:
+                    for student in tutorial_groups[tutorial_group_name]:
+                        print(student.string_form,file=out_file);
             pass;
         except:
-            pass;#tbc error
+            raise FileExistsError;#tbc error
         pass;
     pass;
