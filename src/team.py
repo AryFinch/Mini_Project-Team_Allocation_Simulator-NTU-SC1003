@@ -81,7 +81,7 @@ class Team:# 类 概念
         self.students.append(new_student);
     
 
-    def estimate_diversity_of_team(self,overall_gender_rate:float,overall_school_diversity:float,overall_cgpa_average:float):
+    def estimate_diversity_of_team(self,overall_gender_rate:float=1.0,overall_school_diversity:float=1.0,overall_cgpa_average:float=4.0):
         """
         传入:3 overalls
         传出:int该组的得分
@@ -100,6 +100,10 @@ class Team:# 类 概念
     #     return self.estimate_diversity_of_team>other.estimate_diversity_of_team;
 
     def __lt__(self,other):
-        return self.estimate_diversity_of_team<other.estimate_diversity_of_team;
+        return self.estimate_diversity_of_team()<other.estimate_diversity_of_team();
 
     pass;
+
+    @property
+    def population(self):
+        return len(self.students);

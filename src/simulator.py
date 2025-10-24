@@ -33,6 +33,7 @@ class TeamAllocationSimulator:
         """
         students=list();
         for line in original_lines:
+            line=line.split(',');
             create_student=Student(line[0],line[1],line[2],line[3],line[4],float(line[5]));
             students.append(create_student);
         return students;
@@ -60,8 +61,8 @@ class TeamAllocationSimulator:
             with open(self.file_address,'r') as csv_file:
                 
         # process file to lines:
-                self.lines=csv_file.readlines();
-                del self.lines[0];
+                lines=csv_file.readlines();
+                del lines[0];
                 
         except:
             raise FileExistsError;# tbc invalid
@@ -105,3 +106,6 @@ class TeamAllocationSimulator:
             raise FileExistsError;#tbc error
         pass;
     pass;
+
+test=TeamAllocationSimulator("records.csv");
+test.begin();

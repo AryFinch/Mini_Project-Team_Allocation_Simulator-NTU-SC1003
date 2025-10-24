@@ -28,7 +28,7 @@ class TeamAllocator:
     def _list_teams_not_full(self,team_capacity) -> list[Team]:
         ans=[]
         for team in self.teams:
-            if len(team)<team_capacity:
+            if len(team.students)<team_capacity:
                 ans.append(team);
         return ans;
     
@@ -79,7 +79,7 @@ class TeamAllocator:
     def tag_students_with_teams(self,students:list[Student]):
         for original_student in students:
             for team_index in range(len(self.teams)):
-                for teamed_student in self.teams[team_index]:
+                for teamed_student in self.teams[team_index].students:
                     if original_student.name==teamed_student.name:
                         original_student.team_assigned=str(team_index);
                         return 1;
