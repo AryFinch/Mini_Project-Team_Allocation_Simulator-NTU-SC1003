@@ -12,16 +12,10 @@ class TeamAllocator:
         <greedy>
     """
     
-    def __init__(self,original_students:list):
+    def __init__(self,original_students:list[Student]):
         # copy data
         from copy import deepcopy
         self.students_copy=deepcopy(original_students);
-
-        # check validity
-        for i in self.students_copy:
-            if not isinstance(i,Student):
-                print("not student");
-                raise TypeError
 
         #set data
         self.teams=[];
@@ -51,21 +45,15 @@ class TeamAllocator:
 
         # run all of the exist team and assign it to the team with highest score if it attend the team
             best_team=Team([]); # rigister the best choice
-            best_score=int(-2147483647);
-            teams_need_students=[teams_need_student in self.teams if len(teams_need_student.students)<team_capacity ];
-            for new_team in teams_need_students: # go thru the existed teams
-                new_score=self.estimate_diversity_of_team(Team(new_team.students+[student])) # estimate the score if the student join
-                if new_score>best_score:
-                    best_score=new_score;# record the best choice
-                    best_team=new_team;
-            best_team.add_student(student);# add the student into the best team
-            if len(best_team.students)==1:# this mean that the best choice is the empty one, indicating that teams is empty
-                self.teams.append(best_team);
-                pass;
+            # run all of the exist team and assign it to the team with highest score if it attend the team
 
+            pass;
+    
+    def _break_team(self):
         pass;
+    
 
-    def allocate_students_into_teams(self,team_capacity:int):
+    def begin(self,team_capacity:int):
         """
         传入:列表(Student);一个组的人数
 
@@ -84,6 +72,7 @@ class TeamAllocator:
             self._assign_unallocated_student_to_team();
 
             # assign all unall. into teams of itself
+            self._assign_unallocated_student_to_team(team_capacity);
             pass;
         elif team_capacity>1:
             # get the team allocation with 1 less students

@@ -61,7 +61,7 @@ class TeamAllocationSimulator:
         
         # call allocator parse team list:
         team_allocator=TeamAllocator(students);
-        teams=team_allocator.allocate_students_into_teams(self.TEAM_CAPACITY);
+        teams=team_allocator.begin(self.TEAM_CAPACITY);
 
         # turn list into csv file:
         new_lines=self._modify_lines_from_teams(lines,teams);
