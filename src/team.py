@@ -20,6 +20,7 @@ class Team:# 类 概念
         
         pass;
     
+    @property
     def gender_rate(self):
         """
         输出:float性别比例
@@ -32,9 +33,9 @@ class Team:# 类 概念
             count_types[student.gender]+=1;
         
         #evaluate the diversity.
-        for value in count_types.values:
-            if value==0:
-                return 0; #lack one pass all
+        # for value in list(count_types.values):
+        if count_types["Female"]*count_types["Female"]==0:
+            return 0; #lack one pass all
 
         numerator=min(count_types["Female"],count_types["Male"]);
         denominator=max(count_types["Female"],count_types["Male"]);
@@ -43,6 +44,7 @@ class Team:# 类 概念
         
         pass;
     
+    @property
     def school_diversity(self):
         """
         输出:float学校多样性
@@ -61,6 +63,7 @@ class Team:# 类 概念
             return 0;
         pass;
     
+    @property
     def cgpa_average(self):
         """
         输出:float平均cgpa
@@ -89,7 +92,7 @@ class Team:# 类 概念
         WEIGHT_SCHOOL_DIVERSITY=0.3;
         WEIGHT_CGPA_AVERAGE=0.2;
 
-        return self.gender_rate()/overall_gender_rate*WEIGHT_GENDER_RATE+self.school_diversity()/overall_school_diversity*WEIGHT_SCHOOL_DIVERSITY+self.cgpa_average()/overall_cgpa_average*WEIGHT_CGPA_AVERAGE;
+        return self.gender_rate/overall_gender_rate*WEIGHT_GENDER_RATE+self.school_diversity/overall_school_diversity*WEIGHT_SCHOOL_DIVERSITY+self.cgpa_average/overall_cgpa_average*WEIGHT_CGPA_AVERAGE;
 
         pass;
     
