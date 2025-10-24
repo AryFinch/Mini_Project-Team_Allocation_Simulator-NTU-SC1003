@@ -4,7 +4,7 @@ class Student:
     包括str:
     tutorial_group,student_id,name,school,gender,cgpa
     """
-    def __init__(self,tutorial_group="",student_id="",name="",school="",gender="",cgpa=""):
+    def __init__(self,tutorial_group="",student_id="",name="",school="",gender="",cgpa:float=0.0):
         """
         初始化函数,
         传入:str
