@@ -96,6 +96,10 @@ class Team:# 类 概念
 
         pass;
     
-    
-    
+    # def __gt__(self,other):
+    #     return self.estimate_diversity_of_team>other.estimate_diversity_of_team;
+
+    def __lt__(self,other):
+        return self.estimate_diversity_of_team<other.estimate_diversity_of_team;
+
     pass;

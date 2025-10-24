@@ -6,10 +6,6 @@ from team import Team
 
 class TeamAllocator:
     """
-    核心:
-        estimate diversity
-        <DFS>
-        <greedy>
     """
     
     def __init__(self,original_students:list[Student]):
@@ -18,8 +14,8 @@ class TeamAllocator:
         self.students_copy=deepcopy(original_students);
 
         #set data
-        self.teams=[];
-        self.unallocated_students=[];
+        self.teams=list();
+        self.unallocated_students=list();
         
         #log the basic diversity or equality of the whole students
         all_in_team=Team(self.students_copy);
@@ -29,7 +25,7 @@ class TeamAllocator:
     
         pass;
     
-    def list_teams_not_full(self,team_capacity) -> list[Team]:
+    def _list_teams_not_full(self,team_capacity) -> list[Team]:
         ans=[]
         for team in self.teams:
             if len(team)<team_capacity:
@@ -58,7 +54,7 @@ class TeamAllocator:
             best_score=int(-2147483647);
 
             # get list of teams need student
-            teams_need_students= self.list_teams_not_full(team_capacity);
+            teams_need_students= self._list_teams_not_full(team_capacity);
             for new_team in teams_need_students:
 
                 # forsee if the allocation is reasonable
@@ -79,6 +75,15 @@ class TeamAllocator:
                 pass;
 
         pass;
+    
+    def tag_students_with_teams(self,students:list[Student]):
+        for original_student in students:
+            for team_index in range(len(self.teams)):
+                for teamed_student in self.teams[team_index]:
+                    if original_student.name==teamed_student.name:
+                        original_student.team_assigned=str(team_index);
+                        return 1;
+        return 0;
 
     def begin(self,team_capacity:int):
         """
@@ -97,7 +102,6 @@ class TeamAllocator:
             # pull all students into unallocated_students
             from copy import deepcopy
             self.unallocated_students=deepcopy(self.students_copy);
-            self._assign_unallocated_student_to_team(1);
 
             # assign all unall. into teams of itself
             self._assign_unallocated_student_to_team(team_capacity);
@@ -109,21 +113,22 @@ class TeamAllocator:
             self.begin(team_capacity-1);
             
             # rank the already-existed teams by overall score
-            # self.teams.sort(key=estimate_diversity_of_team());# leave for further investigation
+            self.teams.sort();# leave for further investigation
             
             # choose the bad team, break and pull into unallo.
-            while len(self.list_teams_not_full(team_capacity)):# if there is unfinished team
+            while len(self._list_teams_not_full(team_capacity))>1:# if there is unfinished team
                 if len(self.teams):
-                    self._break_team_into_unallocated_students();# this is the worst team
-
-            # sort rest teams by cgpa
+                    self._break_team_into_unallocated_students(0);# this is the worst team
 
             # assign students in unallo. into teams need a student
-
+            self._assign_unallocated_student_to_team(team_capacity);
 
             pass;
         else:
             raise ValueError;
+    
+        # self._tag_students_with_teams();
+    
         pass;
     
     # def estimate_diversity_of_team(self,original_team:Team):

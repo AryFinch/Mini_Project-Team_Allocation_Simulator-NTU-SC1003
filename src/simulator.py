@@ -64,30 +64,44 @@ class TeamAllocationSimulator:
                 del self.lines[0];
                 
         except:
-            pass;# tbc invalid
+            raise FileExistsError;# tbc invalid
         
         # process sheet to student list:
         students=self._parse_students_from_lines(lines);
 
         #into different groups:
         tutorial_groups={};
+        tutorial_group_names=[];
         for s in students:
-            pass;#tbc
+            if not s.tutorial_group in tutorial_groups:
+                tutorial_groups[s.tutorial_group]=[];
+                tutorial_group_names.append(s.tutorial_group);
+            tutorial_groups[s.tutorial_group].append(s);
         
-        # call allocator parse team list:
-        team_allocator=TeamAllocator(students);
-        teams=team_allocator.begin(self.TEAM_CAPACITY);
+        #for each tutgroup
+        for tutorial_group_name in tutorial_group_names:
+            team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);
+            team_allocator.begin(self.TEAM_CAPACITY);
+            is_successful=team_allocator.tag_students_with_teams(students);
+            if not is_successful:
+                print("cannot find corresponding student in allocator")
+                raise KeyError;
+        
+        # # call allocator parse team list:
+        # team_allocator=TeamAllocator(students);
+        # teams=team_allocator.begin(self.TEAM_CAPACITY);
 
-        # turn list into csv file:
-        new_lines=self._modify_lines_from_teams(lines,teams);
+        # # turn list into csv file:
+        # new_lines=self._modify_lines_from_teams(lines,teams);
 
         # create file and put answer in
         try:
-            with open("out2.csv",'w') as out_file:
-                for i in new_lines:
-                    print(i,file=out_file);
+            with open("out.csv",'w') as out_file:
+                for tutorial_group_name in tutorial_group_names:
+                    for student in tutorial_groups[tutorial_group_name]:
+                        print(student.string_form,file=out_file);
             pass;
         except:
-            pass;#tbc error
+            raise FileExistsError;#tbc error
         pass;
     pass;

@@ -19,5 +19,9 @@ class Student:
         self.gender=deepcopy(gender)
         self.cgpa=deepcopy(cgpa);
         # might not be used, but leave the possibility.
-        self.team_asssigned=deepcopy(None);
+        self.team_assigned=deepcopy(str());
     pass;
+
+    @property
+    def string_form(self):
+        return f"{self.tutorial_group},{self.student_id},{self.school},{self.name},{self.cgpa},{self.team_assigned}"
