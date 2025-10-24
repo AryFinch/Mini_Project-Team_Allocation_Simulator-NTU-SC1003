@@ -33,6 +33,7 @@ class TeamAllocationSimulator:
         """
         students=list();
         for line in original_lines:
+            line=(line.split('\n'))[0];
             line=line.split(',');
             create_student=Student(line[0],line[1],line[2],line[3],line[4],float(line[5]));
             students.append(create_student);
@@ -83,7 +84,7 @@ class TeamAllocationSimulator:
         for tutorial_group_name in tutorial_group_names:
             team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);
             team_allocator.begin(self.TEAM_CAPACITY);
-            is_successful=team_allocator.tag_students_with_teams(students);
+            is_successful=team_allocator.tag_students_with_teams(tutorial_groups[tutorial_group_name]);
             if not is_successful:
                 print("cannot find corresponding student in allocator")
                 raise KeyError;
@@ -98,6 +99,7 @@ class TeamAllocationSimulator:
         # create file and put answer in
         try:
             with open("out.csv",'w') as out_file:
+                print("Tutorial Group,Student ID,School,Name,Gender,CGPA");
                 for tutorial_group_name in tutorial_group_names:
                     for student in tutorial_groups[tutorial_group_name]:
                         print(student.string_form,file=out_file);

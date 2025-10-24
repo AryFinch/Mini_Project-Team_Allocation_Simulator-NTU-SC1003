@@ -78,12 +78,17 @@ class TeamAllocator:
     
     def tag_students_with_teams(self,students:list[Student]):
         for original_student in students:
+            have_found=False;
             for team_index in range(len(self.teams)):
                 for teamed_student in self.teams[team_index].students:
                     if original_student.name==teamed_student.name:
                         original_student.team_assigned=str(team_index);
-                        return 1;
-        return 0;
+                        # print(original_student.string_form);
+                        have_found=True;
+            if have_found!=True:
+                return 0;
+        
+        return 1;
 
     def begin(self,team_capacity:int):
         """
