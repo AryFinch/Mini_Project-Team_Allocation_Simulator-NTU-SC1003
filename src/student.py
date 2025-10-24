@@ -32,4 +32,4 @@ class Student:
 
     @property
     def string_form(self):
-        return f"{self.tutorial_group},{self.student_id},{self.school},{self.name},{self.cgpa},{self.team_assigned}"
+        return f"{self.tutorial_group},{self.student_id},{self.school},{self.name},{self.gender},{self.cgpa},{self.team_assigned}"

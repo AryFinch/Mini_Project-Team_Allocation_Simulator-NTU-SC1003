@@ -99,7 +99,7 @@ class TeamAllocationSimulator:
         # create file and put answer in
         try:
             with open("out.csv",'w') as out_file:
-                print("Tutorial Group,Student ID,School,Name,Gender,CGPA");
+                print("Tutorial Group,Student ID,School,Name,Gender,CGPA,Team Assigned",file=out_file);
                 for tutorial_group_name in tutorial_group_names:
                     for student in tutorial_groups[tutorial_group_name]:
                         print(student.string_form,file=out_file);
@@ -108,6 +108,3 @@ class TeamAllocationSimulator:
             raise FileExistsError;#tbc error
         pass;
     pass;
-
-test=TeamAllocationSimulator("records.csv");
-test.begin();
