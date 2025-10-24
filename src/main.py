@@ -11,9 +11,7 @@ FILE_ADDRESS="records.csv";
 
 #创建实例
 from simulator import TeamAllocationSimulator
-team_allocation_simulator=TeamAllocationSimulator();
-#传参
-team_allocation_simulator.file_address=FILE_ADDRESS;
+team_allocation_simulator=TeamAllocationSimulator(FILE_ADDRESS);
 
 #运行
 if True:

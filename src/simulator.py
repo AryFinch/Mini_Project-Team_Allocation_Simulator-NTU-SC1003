@@ -33,6 +33,8 @@ class TeamAllocationSimulator:
         """
         students=list();
         for line in original_lines:
+            line=(line.split('\n'))[0];
+            line=line.split(',');
             create_student=Student(line[0],line[1],line[2],line[3],line[4],float(line[5]));
             students.append(create_student);
         return students;
@@ -45,13 +47,13 @@ class TeamAllocationSimulator:
     #     """
     #     pass;
     
-    def _modify_lines_from_teams(self,original_lines,original_teams):
-        """
-        传入:列表 源文件的每一列; 列表 team
-        传出:列表 输出文件的每一列
-        遍历源文件的每一列,将该列学生所分组按照teams添加新的一列
-        """
-        pass;
+    # def _modify_lines_from_teams(self,original_lines,original_teams):
+    #     """
+    #     传入:列表 源文件的每一列; 列表 team
+    #     传出:列表 输出文件的每一列
+    #     遍历源文件的每一列,将该列学生所分组按照teams添加新的一列
+    #     """
+    #     pass;
 
     def begin(self):
         # open file:
@@ -60,8 +62,8 @@ class TeamAllocationSimulator:
             with open(self.file_address,'r') as csv_file:
                 
         # process file to lines:
-                self.lines=csv_file.readlines();
-                del self.lines[0];
+                lines=csv_file.readlines();
+                del lines[0];
                 
         except:
             raise FileExistsError;# tbc invalid
@@ -82,7 +84,7 @@ class TeamAllocationSimulator:
         for tutorial_group_name in tutorial_group_names:
             team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);
             team_allocator.begin(self.TEAM_CAPACITY);
-            is_successful=team_allocator.tag_students_with_teams(students);
+            is_successful=team_allocator.tag_students_with_teams(tutorial_groups[tutorial_group_name]);
             if not is_successful:
                 print("cannot find corresponding student in allocator")
                 raise KeyError;
@@ -97,6 +99,7 @@ class TeamAllocationSimulator:
         # create file and put answer in
         try:
             with open("out.csv",'w') as out_file:
+                print("Tutorial Group,Student ID,School,Name,Gender,CGPA,Team Assigned",file=out_file);
                 for tutorial_group_name in tutorial_group_names:
                     for student in tutorial_groups[tutorial_group_name]:
                         print(student.string_form,file=out_file);
