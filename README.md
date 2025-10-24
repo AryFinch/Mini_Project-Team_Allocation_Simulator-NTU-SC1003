@@ -6,7 +6,7 @@ Li Zhuochen
 # 项目流程 🎯
 ## 1
 - [x] 1. 设计程序结构
-- [ ] 2. 填写写主干内容
+- [x] 2. 填写写主干内容
 - [ ] 3. 调试至无明显bug
 ## 2
 - [ ] 1. 写“可视化”部分
@@ -22,20 +22,18 @@ Li Zhuochen
 
 ## 待完成函数
 ### team.py
-- [ ] gender_rate
-- [ ] school_diversity
-- [ ] cgpa_average
+- [x] gender_rate
+- [x] school_diversity
+- [x] cgpa_average
 ### simulator.py
-- [ ] _parse_lines_from_csv_file
-- [ ] _parse_students_from_lines
-- [ ] _modify_lines_from_teams
+- [x] _parse_students_from_lines
 ### team_allocator.py
-- [ ] _assign_unallocated_student_to_team
-- [ ] _break_team
-- [ ] estimate_diversity_of_team
-- [ ] (Li Zhuochen) allocate_students_into_teams
-- [ ] (Li Zhuochen) allocate_students_into_teams
-- [ ] (need design) estimate_diversity_of_team
+- [x] _assign_unallocated_student_to_team
+- [x] _break_team
+- [x] estimate_diversity_of_team
+- [x] (Li Zhuochen) allocate_students_into_teams
+- [x] (Li Zhuochen) allocate_students_into_teams
+- [x] (need design) estimate_diversity_of_team
 
 ## stucture 🏛️
 **student.py**:封装了一个学生的所有信息
