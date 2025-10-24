@@ -1,5 +1,9 @@
 class Student:
     """
+    Present all the information of a student
+    Include str:
+    tutorial_group,student_id,name,school,gender,cgpa
+    
     一个学生的所有信息
     包括str:
     tutorial_group,student_id,name,school,gender,cgpa
@@ -18,6 +22,10 @@ class Student:
         self.school=deepcopy(school)
         self.gender=deepcopy(gender)
         self.cgpa=deepcopy(cgpa);
+        try:
+            self.cgpa = float(cgpa)
+        except:
+            self.cgpa = 0.0
         # might not be used, but leave the possibility.
         self.team_assigned=deepcopy(str());
     pass;
