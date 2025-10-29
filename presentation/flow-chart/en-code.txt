@@ -1,0 +1,19 @@
+graph TD
+    A["start allocation:begin(n)"] --> B{"recursion:n==1?"};
+    B -->|Yes| C["allocate everyone to a single team"];
+    C --> D["return"];
+    
+    B -->|No| E["call recursion: begin(n-1)"];
+    E --> F["get teams each has n-1 students"];
+    F --> G{"exists team_need_student ?"};
+    G -->|Yes| H["break down a team with lowest score"];
+    H --> I["pull students into unallo."];
+    I --> J["assign unallo. into team_need_student"];
+    J --> G;
+    
+    G -->|No|L["return"];
+    
+    style A fill:#abc
+    style E fill:#def
+    style B fill:#ace
+    style C fill:#999
