@@ -1,0 +1,15 @@
+def begin(n):
+    if n == 1 :
+        for every_student:
+            create_team(student);
+    endif
+    elif n>1
+        begin(n-1) # get a previous grouping state
+        while number_teams_not_full>1
+            rank(estimate_diversity_of_team());
+            find_team_to_break():
+            if not_full:
+                _break_team_into_unallocated_students(team);
+    endif
+    else:
+        raise error

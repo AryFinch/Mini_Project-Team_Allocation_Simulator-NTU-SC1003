@@ -1,0 +1,11 @@
+def begin(n):
+    if n == 1 :
+        allocate_every_student_into_group
+    endif
+
+    else:
+        begin(n-1) # get a previous grouping state
+            if exists_team_need_student():
+                break_down(Team("lowest score"))
+            unallocated_students.append();
+            assign_students(best_team)
