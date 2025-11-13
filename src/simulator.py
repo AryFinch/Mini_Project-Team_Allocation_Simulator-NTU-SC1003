@@ -4,11 +4,19 @@ from student import Student
 from team import Team
 
 class TeamAllocationSimulator:
-    def __init__(self,file_address=""):
+    """
+    procedures:
+        read files, process into data
+        process data
+        tag data into files, write
+    """
+    def __init__(self,file_address,output_address):
         """
         TeamAllocationSimulator初始化
+        additional: set TEAMCAPACITY as a variable for extendability
         """
         self.file_address=file_address;
+        self.output_address=output_address;
         self.TEAM_CAPACITY=5;
         pass;
 
@@ -30,6 +38,7 @@ class TeamAllocationSimulator:
         传入:列表 源文件的各个行
         传出:列表(student类)
         将lines的每一项化成student
+        turn each of lines into Student instance
         """
         students=list();
         for line in original_lines:
@@ -56,6 +65,11 @@ class TeamAllocationSimulator:
     #     pass;
 
     def begin(self):
+        """
+        main body
+        apply main procedures
+        considering terrible parameter transition, some are not abstracted into func
+        """
         # open file:
         lines=[];
         try:
@@ -67,23 +81,25 @@ class TeamAllocationSimulator:
                 
         except:
             raise FileExistsError;# tbc invalid
+            pass;
         
         # process sheet to student list:
         students=self._parse_students_from_lines(lines);
 
-        #into different groups:
-        tutorial_groups={};
-        tutorial_group_names=[];
+        # into different groups:
+        tutorial_groups={};#initialize
+        tutorial_group_names=[];#count types
         for s in students:
             if not s.tutorial_group in tutorial_groups:
                 tutorial_groups[s.tutorial_group]=[];
-                tutorial_group_names.append(s.tutorial_group);
-            tutorial_groups[s.tutorial_group].append(s);
+                tutorial_group_names.append(s.tutorial_group);#record new tut group
+            tutorial_groups[s.tutorial_group].append(s);# add student
         
-        #for each tutgroup
+        #for each tutgroup, call team_allocator
         for tutorial_group_name in tutorial_group_names:
-            team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);
+            team_allocator=TeamAllocator(tutorial_groups[tutorial_group_name]);#create instance
             team_allocator.begin(self.TEAM_CAPACITY);
+            # tag data into original files form
             is_successful=team_allocator.tag_students_with_teams(tutorial_groups[tutorial_group_name]);
             if not is_successful:
                 print("cannot find corresponding student in allocator")
@@ -98,13 +114,14 @@ class TeamAllocationSimulator:
 
         # create file and put answer in
         try:
-            with open("out.csv",'w') as out_file:
+            with open(self.output_address,'w') as out_file:
                 print("Tutorial Group,Student ID,School,Name,Gender,CGPA,Team Assigned",file=out_file);
                 for tutorial_group_name in tutorial_group_names:
                     for student in tutorial_groups[tutorial_group_name]:
-                        print(student.string_form,file=out_file);
+                        print(student.info,file=out_file);
             pass;
         except:
             raise FileExistsError;#tbc error
         pass;
     pass;
+
