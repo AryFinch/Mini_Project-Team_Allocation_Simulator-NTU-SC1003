@@ -106,8 +106,10 @@ class Team:# 类 概念
         WEIGHT_GENDER_RATE=0.7;
         WEIGHT_SCHOOL_DIVERSITY=0.2;
         WEIGHT_CGPA_AVERAGE=0.1;
+        
+        return self.gender_rate/Team.overall_gender_rate*WEIGHT_GENDER_RATE+self.school_diversity/Team.overall_school_diversity*WEIGHT_SCHOOL_DIVERSITY+(1-abs(self.cgpa_average-Team.overall_cgpa_average))*WEIGHT_CGPA_AVERAGE;
+        
 
-        return self.gender_rate/Team.overall_gender_rate*WEIGHT_GENDER_RATE+self.school_diversity/Team.overall_school_diversity*WEIGHT_SCHOOL_DIVERSITY+self.cgpa_average/Team.overall_cgpa_average*WEIGHT_CGPA_AVERAGE;
         # return self.gender_rate*WEIGHT_GENDER_RATE+self.school_diversity*WEIGHT_SCHOOL_DIVERSITY+self.cgpa_average*WEIGHT_CGPA_AVERAGE;
 
         pass;

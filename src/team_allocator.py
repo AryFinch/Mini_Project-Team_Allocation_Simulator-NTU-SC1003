@@ -6,7 +6,7 @@ from team import Team
 
 import logging
 logging.basicConfig(
-    filename="team_assigned.csv",
+    filename="team_assigned3.csv",
     level=logging.INFO,
     format="%(message)s"
 )
